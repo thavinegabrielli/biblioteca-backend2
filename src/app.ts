@@ -1,6 +1,7 @@
 import express from "express";
 import cors from 'cors';
-import { Aluno } from "./model/Aluno";
+import { DataBaseModel } from "./model/DataBaseModel";
+import AlunoController from "./controller/AlunoController";
 
 
 // Cria o servidor express
@@ -8,15 +9,27 @@ const app = express();
 // Define a porta que o servidor vai escutar as requisições
 const port: number = 3000;
 
-// Habilitando o uso de JSON no servidor express
-app.use(express.json());
+// criando servidor web
+const server = express();
+server.use(cors());
+server.use(express.json());
 
-// Habilitando o uso do CORS para garantir a segurança das requisições
-app.use(cors());
+// rotas da aplicação
+server.get('/', (req, res) => {
+    res.json({ mensagem: "Rota padrão" });
+});
 
-// Primeira rota, a rota principal do servidor
-app.get('/', (req, res) => {
-    console.log('Recebi sua requisição');
+server.get('/alunos', AlunoController.todos);
 
-    res.send({ mensagem: "Estou devolvendo a resposta para sua requisição" });
+new DataBaseModel().testeConexao().then((resdb) => {
+    if (resdb) {
+        console.clear();
+        console.log("Conexão com banco de dados realizada com sucesso!");
+        // iniciando o servidor
+        server.listen(port, () => {
+            console.log(`Servidor iniciado no endereço http://localhost:${port}`);
+        });
+    } else {
+        console.log("Erro ao conectar com o banco de dados");
+    }
 });

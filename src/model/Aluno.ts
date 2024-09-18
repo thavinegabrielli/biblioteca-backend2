@@ -1,5 +1,11 @@
+import { DataBaseModel } from "./DataBaseModel";
+
+const database = new DataBaseModel().pool;
+
 export class Aluno {
 
+    private idAluno: number = 0;
+    private ra: string = '';
     private nome: string;
     private sobrenome: string;
     private dataNascimento: Date;
@@ -18,6 +24,42 @@ export class Aluno {
 
     //métodos GETTERS and SETTERS
     /**
+     * Retorna o id do aluno
+     * @returns id: id aluno
+     */
+    public getIdAluno(): number{
+        return this.idAluno;
+    }
+
+    /**
+     * Atribui o parâmetro ao atributo idAluno
+     * 
+     * @param _idAluno : idAluno
+     */
+    public setIdAluno(_idAluno: number): void{
+        this.idAluno = _idAluno;
+    }
+
+    /*
+    /**
+     * Retorna o ra do aluno
+     * @returns ra: ra aluno
+     */
+    public getRA(): string {
+        return this.ra;
+    }
+
+    /**
+     * Atribui o parâmetro ao atributo ra
+     * 
+     * @param _ra : ra do aluno
+     */
+    public setRA(_ra: string): void{
+        this.ra = _ra;
+    }
+    
+
+    /**
      * Retorna o nome do aluno
      * @returns nome: nome aluno
      */
@@ -28,7 +70,7 @@ export class Aluno {
     /**
      * Atribui o parâmetro ao atributo nome
      * 
-     * @param _nome : nome da pessoa
+     * @param _nome : nome do aluno
      */
     public setNome(_nome: string){  
         this.nome = _nome;
@@ -108,6 +150,47 @@ export class Aluno {
      */
     public setCelular(_celular: string) {
         this.celular = _celular;
+    }
+
+    // MÉTODO PARA ACESSAR O BANCO DE DADOS
+    // CRUD Create - READ - Update - Delete
+    static async listarAlunos(): Promise<Array<Aluno> | null> {
+        // Criando lista vazia para armazenar os alunos
+        let listaDeAlunos: Array<Aluno> = [];
+
+        try {
+            // Query para consulta no banco de dados
+            const querySelectAluno = `SELECT * FROM Aluno;`;
+
+            // executa a query no banco de dados
+            const respostaBD = await database.query(querySelectAluno);
+
+            // percorre cada resultado retornado pelo banco de dados
+            // aluno é o apelido que demos para cada linha retornada do banco de dados
+            respostaBD.rows.forEach((aluno) => {
+                // criando objeto aluno
+                let novoAluno = new Aluno(
+                    aluno.nome,
+                    aluno.sobrenome,
+                    aluno.dataNascimento,
+                    aluno.endereco,
+                    aluno.email,
+                    aluno.celular
+                );
+                // adicionando o ID ao objeto
+                novoAluno.setIdAluno(aluno.id);
+                novoAluno.setRA(aluno.ra);
+
+                // adicionando a pessoa na lista
+                listaDeAlunos.push(novoAluno);
+            });
+
+            // retornado a lista de pessoas para quem chamou a função
+            return listaDeAlunos;
+        } catch (error) {
+            console.log(`Erro ao acessar o modelo: ${error}`);
+            return null;
+        }
     }
 
     
