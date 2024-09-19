@@ -14,12 +14,14 @@ const server = express();
 server.use(cors());
 server.use(express.json());
 
-// rotas da aplicação
+// rota principal da aplicação
 server.get('/', (req, res) => {
     res.json({ mensagem: "Rota padrão" });
 });
 
+// alunos
 server.get('/alunos', AlunoController.todos);
+server.post('/cadastrar-aluno', AlunoController.cadastrar);
 
 new DataBaseModel().testeConexao().then((resdb) => {
     if (resdb) {

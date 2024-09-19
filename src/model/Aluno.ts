@@ -193,5 +193,37 @@ export class Aluno {
         }
     }
 
+    static async cadastrarAluno(aluno: Aluno): Promise<Boolean> {
+        let insertResult = false;
+        
+        try {
+            const queryInsertAluno = `
+                INSERT INTO Aluno (nome, sobrenome, data_nascimento, endereco, email, celular)
+                VALUES (
+                    '${aluno.getNome().toUpperCase()}',
+                    '${aluno.getSobrenome().toUpperCase()}',
+                    '${aluno.getDataNascimento()}',
+                    '${aluno.getEndereco().toUpperCase()}',
+                    '${aluno.getEmail().toUpperCase()}',
+                    '${aluno.getCelular()}'
+                )
+                RETURNING id_aluno;`;
+
+            const result = await database.query(queryInsertAluno);
+
+            if (result.rows.length > 0) {
+                const idAluno = result.rows[0].id_aluno;
+                console.log(`Aluno cadastrado com sucesso. ID: ${idAluno}`);
+                insertResult = true;
+            }
+
+            return insertResult;
+        } catch (error) {
+            console.error(`Erro ao cadastrar aluno: ${error}`);
+            return insertResult;
+        }
+    }
+
+
     
 }
