@@ -240,21 +240,21 @@ export class Aluno {
      * @returns Boolean indicando se a remoção foi bem-sucedida
     */
     static async removerAluno(id_aluno: number): Promise<Boolean> {
-    let queryResult = false;
+        let queryResult = false;
     
-    try {
-        // Construção da query SQL para deletar o Aluno.
-        const queryDeleteAluno = `DELETE FROM Aluno WHERE id_aluno=${id_aluno};`;
+        try {
+            // Construção da query SQL para deletar o Aluno.
+            const queryDeleteAluno = `DELETE FROM Aluno WHERE id_aluno=${id_aluno};`;
     
-        // Executa a query de exclusão e verifica se a operação foi bem-sucedida.
-        await database.query(queryDeleteAluno)
-        .then((result) => {
-            if (result.rowCount != 0) {
-                queryResult = true; // Se a operação foi bem-sucedida, define queryResult como true.
-            }
-        });
+            // Executa a query de exclusão e verifica se a operação foi bem-sucedida.
+            await database.query(queryDeleteAluno)
+            .then((result) => {
+                if (result.rowCount != 0) {
+                    queryResult = true; // Se a operação foi bem-sucedida, define queryResult como true.
+                }
+            });
     
-          return queryResult;
+            return queryResult;
 
         } catch (error) {
             // Em caso de erro na consulta, exibe o erro no console e retorna false.
@@ -269,7 +269,7 @@ export class Aluno {
      * @param aluno Objeto do tipo Aluno com os novos dados
      * @returns true caso sucesso, false caso erro
      */
-     static async atualizarCadastroAluno(aluno: Aluno): Promise<Boolean> {
+    static async atualizarCadastroAluno(aluno: Aluno): Promise<Boolean> {
         let queryResult = false; // Variável para armazenar o resultado da operação.
         try {
             // Construção da query SQL para atualizar os dados do aluno no banco de dados.
@@ -284,11 +284,11 @@ export class Aluno {
 
             // Executa a query de atualização e verifica se a operação foi bem-sucedida.
             await database.query(queryAtualizarAluno)
-                .then((result) => {
-                    if (result.rowCount != 0) {
-                        queryResult = true; // Se a operação foi bem-sucedida, define queryResult como true.
-                    }
-                });
+            .then((result) => {
+                if (result.rowCount != 0) {
+                    queryResult = true; // Se a operação foi bem-sucedida, define queryResult como true.
+                }
+            });
 
             // Retorna o resultado da operação para quem chamou a função.
             return queryResult;

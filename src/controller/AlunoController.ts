@@ -77,7 +77,7 @@ class AlunoController extends Aluno {
                 return res.status(401).json('Erro ao deletar aluno');
             }
         } catch (error) {
-            console.log("Error on controller method remover");
+            console.log("Erro ao remover o Aluno");
             console.log(error);
             return res.status(500).send("error");
         }
