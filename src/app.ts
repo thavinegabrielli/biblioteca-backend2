@@ -22,6 +22,7 @@ server.get('/', (req, res) => {
 // alunos
 server.get('/alunos', AlunoController.todos);
 server.post('/cadastrar-aluno', AlunoController.cadastrar);
+server.delete('/remover-aluno', AlunoController.remover);
 
 new DataBaseModel().testeConexao().then((resdb) => {
     if (resdb) {

@@ -1,9 +1,17 @@
 import { Aluno } from "../model/Aluno";
 import { Request, Response } from "express";
 
+/**
+ * Controlador para operações relacionadas aos alunos.
+ */
 class AlunoController extends Aluno {
 
-
+    /**
+     * Lista todos os alunos.
+     * @param req Objeto de requisição HTTP.
+     * @param res Objeto de resposta HTTP.
+     * @returns Lista de alunos em formato JSON.
+     */
     static async todos(req: Request, res: Response) {
         try {
             const listaDeAlunos = await Aluno.listarAlunos();
@@ -16,7 +24,12 @@ class AlunoController extends Aluno {
         }
     }
 
-
+   /**
+     * Cadastra um novo aluno.
+     * @param req Objeto de requisição HTTP com os dados do aluno.
+     * @param res Objeto de resposta HTTP.
+     * @returns Mensagem de sucesso ou erro em formato JSON.
+     */
     static async cadastrar(req: Request, res: Response) {
         try {
             // Desestruturando objeto recebido pelo front-end
@@ -47,6 +60,28 @@ class AlunoController extends Aluno {
         }
     }
 
+    /**
+     * Remove um aluno.
+     * @param req Objeto de requisição HTTP com o ID do aluno a ser removido.
+     * @param res Objeto de resposta HTTP.
+     * @returns Mensagem de sucesso ou erro em formato JSON.
+     */
+    static async remover(req: Request, res: Response): Promise<Response> {
+        try {
+            const idAluno = parseInt(req.query.idAluno as string);
+            const result = await Aluno.removerAluno(idAluno);
+            
+            if (result) {
+                return res.status(200).json('Aluno removido com sucesso');
+            } else {
+                return res.status(401).json('Erro ao deletar aluno');
+            }
+        } catch (error) {
+            console.log("Error on controller method remover");
+            console.log(error);
+            return res.status(500).send("error");
+        }
+    }
 }
 
 export default AlunoController;

@@ -154,6 +154,12 @@ export class Aluno {
 
     // MÉTODO PARA ACESSAR O BANCO DE DADOS
     // CRUD Create - READ - Update - Delete
+
+    /**
+     * Retorna uma lista com todos os alunos cadastrados no banco de dados
+     * 
+     * @returns Lista com todos os alunos cadastrados no banco de dados
+     */
     static async listarAlunos(): Promise<Array<Aluno> | null> {
         // Criando lista vazia para armazenar os alunos
         let listaDeAlunos: Array<Aluno> = [];
@@ -193,6 +199,11 @@ export class Aluno {
         }
     }
 
+    /**
+     * Cadastra um novo aluno no banco de dados
+     * @param aluno Objeto Aluno contendo as informações a serem cadastradas
+     * @returns Boolean indicando se o cadastro foi bem-sucedido
+     */
     static async cadastrarAluno(aluno: Aluno): Promise<Boolean> {
         let insertResult = false;
         
@@ -213,7 +224,6 @@ export class Aluno {
 
             if (result.rows.length > 0) {
                 const idAluno = result.rows[0].id_aluno;
-                console.log(`Aluno cadastrado com sucesso. ID: ${idAluno}`);
                 insertResult = true;
             }
 
@@ -223,6 +233,35 @@ export class Aluno {
             return insertResult;
         }
     }
+
+      /**
+     * Remove um aluno do banco de dados
+     * @param idAluno ID do aluno a ser removido
+     * @returns Boolean indicando se a remoção foi bem-sucedida
+     */
+      static async removerAluno(id_aluno: number): Promise<Boolean> {
+        let queryResult = false;
+    
+        try {
+          // Construção da query SQL para deletar o Aluno.
+          const queryDeleteAluno = `DELETE FROM Aluno WHERE id_aluno=${id_aluno};`;
+    
+          // Executa a query de exclusão e verifica se a operação foi bem-sucedida.
+          await database.query(queryDeleteAluno)
+            .then((result) => {
+              if (result.rowCount != 0) {
+                queryResult = true; // Se a operação foi bem-sucedida, define queryResult como true.
+              }
+            });
+    
+          return queryResult;
+
+        } catch (error) {
+          // Em caso de erro na consulta, exibe o erro no console e retorna false.
+          console.log(`Erro na consulta: ${error}`);
+          return queryResult;
+        }
+      }
 
 
     
