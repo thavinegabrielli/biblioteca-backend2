@@ -19,10 +19,11 @@ server.get('/', (req, res) => {
     res.json({ mensagem: "Rota padrão" });
 });
 
-// alunos
+// CRUD Aluno
 server.get('/alunos', AlunoController.todos);
 server.post('/cadastrar-aluno', AlunoController.cadastrar);
 server.delete('/remover-aluno', AlunoController.remover);
+server.put('/atualizar-aluno', AlunoController.atualizar);
 
 new DataBaseModel().testeConexao().then((resdb) => {
     if (resdb) {
