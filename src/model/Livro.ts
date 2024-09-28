@@ -186,8 +186,8 @@ public getISBN(): string{
         return this.statusLivroEmprestado;
     } 
 
-    public setStatusLivroEmprestado(_statusLivroEmprestimo: string): void{
-        this.statusLivroEmprestado = _statusLivroEmprestimo;
+    public setStatusLivroEmprestado(_statusLivroEmprestado: string): void{
+        this.statusLivroEmprestado = _statusLivroEmprestado;
     }
 
     // MÉTODO PARA ACESSAR O BANCO DE DADOS
@@ -226,6 +226,7 @@ public getISBN(): string{
                 );
                 // adicionando o ID ao objeto
                 novoLivro.setIdLivro(livro.id);
+                console.log(novoLivro)
                 
                 // adicionando um livro na lista
                 listaDeLivros.push(novoLivro);
@@ -239,14 +240,40 @@ public getISBN(): string{
         }
     }
 
+    /**
+     * Cadastra um novo livro no banco de dados
+     * @param livro Objeto Livro contendo as informações a serem cadastradas
+     * @returns Boolean indicando se o cadastro foi bem-sucedido
+     */
+    static async cadastrarLivro(livro: Livro): Promise<Boolean> {
+        let insertResult = false;
+        
+        try {
+            const queryInsertLivro = `
+                INSERT INTO Livro (autor, editora, ano_publicacao, isbn, quant_toral, quant_disponivel, valor_aquisicao, status_livro_emprestado)
+                VALUES (
+                    '${livro.getAutor().toUpperCase()}',
+                    '${livro.getEditora().toUpperCase()}',
+                    '${livro.getAnoPublicacao().toUpperCase()}',
+                    '${livro.getISBN().toUpperCase()}',
+                     ${livro.getQuantTotal()},
+                     ${livro.getQuantDisponivel()},
+                     ${livro.getValorAquisicao()},
+                    '${livro.getStatusLivroEmprestado().toUpperCase()}'
+                )
+                RETURNING id_livro;`;
 
+            const result = await database.query(queryInsertLivro);
 
-    
+            if (result.rows.length > 0) {
+                const idLivro = result.rows[0].id_livro;
+                insertResult = true;
+            }
 
-    
-
-   
-
-
-
+            return insertResult;
+        } catch (error) {
+            console.error(`Erro ao cadastrar livro: ${error}`);
+            return insertResult;
+        }
+    }
 }

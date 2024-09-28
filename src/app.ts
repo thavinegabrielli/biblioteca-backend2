@@ -2,6 +2,7 @@ import express from "express";
 import cors from 'cors';
 import { DataBaseModel } from "./model/DataBaseModel";
 import AlunoController from "./controller/AlunoController";
+import LivroController from "./controller/LivroController";
 
 
 // Cria o servidor express
@@ -24,6 +25,11 @@ server.get('/alunos', AlunoController.todos);
 server.post('/cadastrar-aluno', AlunoController.cadastrar);
 server.delete('/remover-aluno', AlunoController.remover);
 server.put('/atualizar-aluno', AlunoController.atualizar);
+
+//CRUD Livro
+server.get('/livros', LivroController.todos);
+server.post('/cadastrar-livro', LivroController.cadastrar);
+
 
 new DataBaseModel().testeConexao().then((resdb) => {
     if (resdb) {
