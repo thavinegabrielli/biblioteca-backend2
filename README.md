@@ -1,4 +1,5 @@
-Novas linhas para o banco Livro:  
+Novas linhas para o banco Livro: 
+ 
   {
     "titulo": "You Don't Know JS: Scope & Closures",
     "autor": "Kyle Simpson",
