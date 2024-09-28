@@ -85,6 +85,38 @@ class LivroController extends Livro {
             return res.status(500).send("error");
         }
     }
+
+    /**
+     * Método para atualizar o cadastro de um livro.
+     * 
+     * @param req Objeto de requisição do Express, contendo os dados atualizados do aluno
+     * @param res Objeto de resposta do Express
+     * @returns Retorna uma resposta HTTP indicando sucesso ou falha na atualização
+     */
+    static async atualizar(req: Request, res: Response): Promise<Response> {
+        try {
+            // Desestrutura o objeto recebido na requisição para obter os dados do livro a ser atualizado
+            const { titulo, autor, editora, anoPublicacao, isbn, quantTotal, quantDisponivel, valorAquisicao, statusLivroEmprestado } = req.body;
+
+            // Cria uma nova instância de Livro com os dados atualizados
+            const livro = new Livro(titulo, autor, editora, anoPublicacao, isbn, quantTotal, quantDisponivel, valorAquisicao, statusLivroEmprestado);
+
+            // Define o ID do livro, que deve ser passado na query string
+            livro.setIdLivro(parseInt(req.query.idLivro as string));
+
+            // Chama o método para atualizar o cadastro do livro no banco de dados
+            if (await Livro.atualizarCadastroLivro(livro)) {
+                return res.status(200).json({ mensagem: "Cadastro atualizado com sucesso!" });
+            } else {
+                return res.status(400).json('Não foi possível atualizar o livro no banco de dados');
+            }
+        } catch (error) {
+            // Caso ocorra algum erro, este é registrado nos logs do servidor
+            console.error(`Erro no modelo: ${error}`);
+            // Retorna uma resposta com uma mensagem de erro
+            return res.json({ mensagem: "Erro ao atualizar aluno." });
+        }
+    }
 }
 
 export default LivroController;

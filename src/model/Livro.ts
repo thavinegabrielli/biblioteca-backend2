@@ -182,10 +182,19 @@ public getISBN(): string{
         this.valorAquisicao = _valorAquisicao;
     }
 
+    /**
+    * Retorna o status do livro
+    * @returns status do livro : statusLivroEmprestado
+    */
     public getStatusLivroEmprestado(): string{
         return this.statusLivroEmprestado;
     } 
 
+    /**
+     * Atribui o parâmetro ao atributo status livro emprestado
+     * 
+     * @param _statusLivroEmprestado : statusLivroEmprestado
+     */
     public setStatusLivroEmprestado(_statusLivroEmprestado: string): void{
         this.statusLivroEmprestado = _statusLivroEmprestado;
     }
@@ -305,5 +314,45 @@ public getISBN(): string{
             return queryResult;
         }
     }
+
+    /**
+     * Atualiza os dados de um livro no banco de dados.
+     * @param livro Objeto do tipo Livro com os novos dados
+     * @returns true caso sucesso, false caso erro
+     */
+    static async atualizarCadastroLivro(livro: Livro): Promise<Boolean> {
+        let queryResult = false; // Variável para armazenar o resultado da operação.
+        try {
+            // Construção da query SQL para atualizar os dados do livro no banco de dados.
+            const queryAtualizarLivro = `UPDATE Livro SET 
+                                            titulo = '${livro.getTitulo().toUpperCase()}', 
+                                            autor = '${livro.getAutor().toUpperCase()}',
+                                            editora = '${livro.getEditora().toUpperCase()}', 
+                                            ano_publicacao = '${livro.getAnoPublicacao().toUpperCase()}',
+                                            isbn = '${livro.getISBN().toUpperCase()}', 
+                                            quant_total = ${livro.getQuantTotal()},
+                                            quant_disponivel = ${livro.getQuantDisponivel()},
+                                            valor_aquisicao = ${livro.getValorAquisicao()},
+                                            status_livro_emprestado = '${livro.getStatusLivroEmprestado().toUpperCase()}'                                           
+                                        WHERE id_livro = ${livro.idLivro}`;
+
+            // Executa a query de atualização e verifica se a operação foi bem-sucedida.
+            await database.query(queryAtualizarLivro)
+            .then((result) => {
+                if (result.rowCount != 0) {
+                    queryResult = true; // Se a operação foi bem-sucedida, define queryResult como true.
+                }
+            });
+
+            // Retorna o resultado da operação para quem chamou a função.
+            return queryResult;
+        } catch (error) {
+            // Em caso de erro na consulta, exibe o erro no console e retorna false.
+            console.log(`Erro na consulta: ${error}`);
+            return queryResult;
+        }
+    }
+
+
 
 }

@@ -30,6 +30,7 @@ server.put('/atualizar-aluno', AlunoController.atualizar);
 server.get('/livros', LivroController.todos);
 server.post('/cadastrar-livro', LivroController.cadastrar);
 server.delete('/remover-livro', LivroController.remover);
+server.put('/atualizar-livro', LivroController.atualizar);
 
 
 new DataBaseModel().testeConexao().then((resdb) => {
