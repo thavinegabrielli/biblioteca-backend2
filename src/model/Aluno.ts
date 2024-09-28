@@ -169,22 +169,23 @@ export class Aluno {
             const querySelectAluno = `SELECT * FROM Aluno;`;
 
             // executa a query no banco de dados
-            const respostaBD = await database.query(querySelectAluno);
+            const respostaBD = await database.query(querySelectAluno);    
 
             // percorre cada resultado retornado pelo banco de dados
             // aluno é o apelido que demos para cada linha retornada do banco de dados
-            respostaBD.rows.forEach((aluno) => {
+            respostaBD.rows.forEach((aluno: any) => {
+                
                 // criando objeto aluno
                 let novoAluno = new Aluno(
                     aluno.nome,
                     aluno.sobrenome,
-                    aluno.dataNascimento,
+                    aluno.data_nascimento,
                     aluno.endereco,
                     aluno.email,
                     aluno.celular
                 );
                 // adicionando o ID ao objeto
-                novoAluno.setIdAluno(aluno.id);
+                novoAluno.setIdAluno(aluno.id_aluno);
                 novoAluno.setRA(aluno.ra);
 
                 // adicionando a pessoa na lista

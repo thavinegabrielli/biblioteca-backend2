@@ -217,17 +217,16 @@ public getISBN(): string{
                     livro.titulo,
                     livro.autor,
                     livro.editora,
-                    livro.anoPublicacao,
+                    livro.ano_publicacao,
                     livro.isbn,
-                    livro.quantTotal,
-                    livro.quantDisponivel,
-                    livro.valorAquisicao,
-                    livro.statusLivroEmprestado
+                    livro.quant_total,
+                    livro.quant_disponivel,
+                    livro.valor_aquisicao,
+                    livro.status_livro_emprestado
                 );
                 // adicionando o ID ao objeto
-                novoLivro.setIdLivro(livro.id);
-                console.log(novoLivro)
-                
+                novoLivro.setIdLivro(livro.id_livro);
+                                
                 // adicionando um livro na lista
                 listaDeLivros.push(novoLivro);
             });
@@ -250,15 +249,16 @@ public getISBN(): string{
         
         try {
             const queryInsertLivro = `
-                INSERT INTO Livro (autor, editora, ano_publicacao, isbn, quant_toral, quant_disponivel, valor_aquisicao, status_livro_emprestado)
+                INSERT INTO Livro (titulo, autor, editora, ano_publicacao, isbn, quant_total, quant_disponivel, valor_aquisicao, status_livro_emprestado)
                 VALUES (
+                    '${livro.getTitulo().toUpperCase()}',
                     '${livro.getAutor().toUpperCase()}',
                     '${livro.getEditora().toUpperCase()}',
                     '${livro.getAnoPublicacao().toUpperCase()}',
                     '${livro.getISBN().toUpperCase()}',
-                     ${livro.getQuantTotal()},
-                     ${livro.getQuantDisponivel()},
-                     ${livro.getValorAquisicao()},
+                    '${livro.getQuantTotal()}',
+                    '${livro.getQuantDisponivel()}',
+                    '${livro.getValorAquisicao()}',
                     '${livro.getStatusLivroEmprestado().toUpperCase()}'
                 )
                 RETURNING id_livro;`;
@@ -276,4 +276,5 @@ public getISBN(): string{
             return insertResult;
         }
     }
+
 }
