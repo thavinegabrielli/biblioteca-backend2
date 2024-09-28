@@ -29,6 +29,7 @@ server.put('/atualizar-aluno', AlunoController.atualizar);
 //CRUD Livro
 server.get('/livros', LivroController.todos);
 server.post('/cadastrar-livro', LivroController.cadastrar);
+server.delete('/remover-livro', LivroController.remover);
 
 
 new DataBaseModel().testeConexao().then((resdb) => {

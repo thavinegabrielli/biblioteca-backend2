@@ -62,6 +62,29 @@ class LivroController extends Livro {
             return res.status(400).json('Erro ao cadastrar o livro');
         }
     }
+
+     /**
+     * Remove um aluno.
+     * @param req Objeto de requisição HTTP com o ID do aluno a ser removido.
+     * @param res Objeto de resposta HTTP.
+     * @returns Mensagem de sucesso ou erro em formato JSON.
+     */
+     static async remover(req: Request, res: Response): Promise<Response> {
+        try {
+            const idLivro= parseInt(req.query.idLivro as string);
+            const result = await Livro.removerLivro(idLivro);
+            
+            if (result) {
+                return res.status(200).json('Livro removido com sucesso');
+            } else {
+                return res.status(401).json('Erro ao deletar livro');
+            }
+        } catch (error) {
+            console.log("Erro ao remover o Livro");
+            console.log(error);
+            return res.status(500).send("error");
+        }
+    }
 }
 
 export default LivroController;

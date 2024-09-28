@@ -277,4 +277,33 @@ public getISBN(): string{
         }
     }
 
+    /**
+     * Remove um livro do banco de dados
+     * @param idLivro ID do livro a ser removido
+     * @returns Boolean indicando se a remoção foi bem-sucedida
+    */
+    static async removerLivro(id_livro: number): Promise<Boolean> {
+        let queryResult = false;
+    
+        try {
+            // Construção da query SQL para deletar o Livro.
+            const queryDeleteLivro = `DELETE FROM Livro WHERE id_livro=${id_livro};`;
+    
+            // Executa a query de exclusão e verifica se a operação foi bem-sucedida.
+            await database.query(queryDeleteLivro)
+            .then((result) => {
+                if (result.rowCount != 0) {
+                    queryResult = true; // Se a operação foi bem-sucedida, define queryResult como true.
+                }
+            });
+    
+            return queryResult;
+
+        } catch (error) {
+            // Em caso de erro na consulta, exibe o erro no console e retorna false.
+            console.log(`Erro na consulta: ${error}`);
+            return queryResult;
+        }
+    }
+
 }
