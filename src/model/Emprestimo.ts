@@ -191,7 +191,40 @@ export class Emprestimo{
             console.log(`Erro ao acessar o modelo: ${error}`);
             return null;
         }
-    }    
+    } 
+
+    /**
+     * Cadastra um novo empréstimo no banco de dados
+     * 
+     * @param idAluno : number
+     * @param idLivro : number
+     * @param dataEmprestimo : Date
+     * @param dataDevolucao : Date
+     * @param statusEmprestimo : string
+     * @returns Promise com o resultado da inserção ou erro
+     */
+    static async cadastrarEmprestimo(
+        idAluno: number,
+        idLivro: number,
+        dataEmprestimo: Date,
+        dataDevolucao: Date,
+        statusEmprestimo: string
+    ): Promise<any> {
+        try {
+            const queryInsertEmprestimo = `
+                INSERT INTO Emprestimo (id_aluno, id_livro, data_emprestimo, data_devolucao, status_emprestimo)
+                VALUES ($1, $2, $3, $4, $5) RETURNING id_emprestimo;
+            `;
+
+            const valores = [idAluno, idLivro, dataEmprestimo, dataDevolucao, statusEmprestimo];
+            const resultado = await database.query(queryInsertEmprestimo, valores);
+
+            return resultado.rows[0].id_emprestimo; // Retorna o ID do novo empréstimo
+        } catch (error) {
+            console.error(`Erro ao cadastrar empréstimo: ${error}`);
+            throw new Error('Erro ao cadastrar o empréstimo.');
+        }
+    }       
  
 }
 
