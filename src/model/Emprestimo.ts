@@ -224,7 +224,10 @@ export class Emprestimo{
             console.error(`Erro ao cadastrar empréstimo: ${error}`);
             throw new Error('Erro ao cadastrar o empréstimo.');
         }
-    }       
+    }    
+    
+    
+    
  
 }
 
