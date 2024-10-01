@@ -1,4 +1,15 @@
-Novas linhas para o banco Livro: 
+Biblioteca e estrutura .json
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------
+ .json Cadastrar Livros
  
   {
     "titulo": "You Don't Know JS: Scope & Closures",
@@ -44,3 +55,24 @@ Novas linhas para o banco Livro:
     "valorAquisicao": 140,
     "statusLivroEmprestado": "Emprestado"
   }
+--------------------------------------------------------------------------------------
+.json cadastrar aluno
+
+{
+	"nome": "Kelly",
+	"sobrenome": "Osborne",
+	"dataNascimento": "1974-04-01",
+	"endereco": "Rua do rock, 666",
+	"email": "morcego@rock.com",
+	"celular": "16998959876"	
+}
+------------------------------------------------------------------------------------
+.json cadastrar emprestimo
+
+{  
+  "idAluno": 1,
+  "idLivro": 1,
+  "dataEmprestimo": "2024-09-01",
+  "dataDevolucao": "2024-09-15",
+  "statusEmprestimo": "Em andamento"
+}

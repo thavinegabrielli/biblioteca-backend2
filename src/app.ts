@@ -3,6 +3,7 @@ import cors from 'cors';
 import { DataBaseModel } from "./model/DataBaseModel";
 import AlunoController from "./controller/AlunoController";
 import LivroController from "./controller/LivroController";
+import EmprestimoController from "./controller/EmprestimoController";
 
 
 // Cria o servidor express
@@ -31,6 +32,9 @@ server.get('/livros', LivroController.todos);
 server.post('/cadastrar-livro', LivroController.cadastrar);
 server.delete('/remover-livro', LivroController.remover);
 server.put('/atualizar-livro', LivroController.atualizar);
+
+//CRUD Emprestimo
+server.get('/emprestimos', EmprestimoController.todos);
 
 
 new DataBaseModel().testeConexao().then((resdb) => {
