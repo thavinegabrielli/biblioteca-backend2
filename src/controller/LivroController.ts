@@ -85,7 +85,7 @@ class LivroController extends Livro {
             return res.status(500).send("error");
         }
     }
-
+    
     /**
      * Método para atualizar o cadastro de um livro.
      * 
