@@ -225,9 +225,44 @@ export class Emprestimo{
             throw new Error('Erro ao cadastrar o empréstimo.');
         }
     }    
-    
-    
-    
- 
+
+     /**
+     * Atualiza os dados de um empréstimo existente no banco de dados
+     * 
+     * @param idEmprestimo : number
+     * @param idAluno : number
+     * @param idLivro : number
+     * @param dataEmprestimo : Date
+     * @param dataDevolucao : Date
+     * @param statusEmprestimo : string
+     * @returns Promise com o resultado da atualização ou erro
+     */
+     static async atualizarEmprestimo(
+        idEmprestimo: number,
+        idAluno: number,
+        idLivro: number,
+        dataEmprestimo: Date,
+        dataDevolucao: Date,
+        statusEmprestimo: string
+    ): Promise<any> {
+        try {
+            const queryUpdateEmprestimo = `UPDATE Emprestimo
+            SET id_aluno = $1, id_livro = $2, data_emprestimo = $3, data_devolucao = $4, status_emprestimo = $5
+            WHERE id_emprestimo = $6
+            RETURNING id_emprestimo;`;
+
+            const valores = [idAluno, idLivro, dataEmprestimo, dataDevolucao, statusEmprestimo, idEmprestimo];
+            const resultado = await database.query(queryUpdateEmprestimo, valores);
+
+            if (resultado.rowCount === 0) {
+                throw new Error('Empréstimo não encontrado.');
+            }
+
+            return resultado.rows[0].id_emprestimo; // Retorna o ID do empréstimo atualizado
+        } catch (error) {
+            console.error(`Erro ao atualizar empréstimo: ${error}`);
+            throw new Error('Erro ao atualizar o empréstimo.');
+        }
+    }
 }
 

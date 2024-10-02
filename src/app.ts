@@ -36,6 +36,7 @@ server.put('/atualizar-livro', LivroController.atualizar);
 //CRUD Emprestimo
 server.get('/emprestimos', EmprestimoController.todos);
 server.post('/cadastrar-emprestimo', EmprestimoController.cadastrar);
+server.put('/atualizar-emprestimo', EmprestimoController.atualizar);
 
 
 new DataBaseModel().testeConexao().then((resdb) => {

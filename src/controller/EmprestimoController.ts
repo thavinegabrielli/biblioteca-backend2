@@ -51,6 +51,35 @@ class EmprestimoController extends Emprestimo{
             return res.status(500).json({ message: 'Erro ao cadastrar o empréstimo.' });
         }
     }
+
+    /**
+     * Atualiza um empréstimo existente.
+     * Recebe os dados do empréstimo a partir da requisição e passa para o serviço.
+     */
+    static async atualizar(req: Request, res: Response): Promise<Response> {
+        try {
+
+            const { idAluno, idLivro, dataEmprestimo, dataDevolucao, statusEmprestimo } = req.body;
+            const idEmprestimo = parseInt(req.query.idEmprestimo as string);
+            
+            // Verifica se todos os campos obrigatórios foram fornecidos
+            if (!idEmprestimo || !idAluno || !idLivro || !dataEmprestimo || !dataDevolucao || !statusEmprestimo) {
+                return res.status(400).json({ message: 'Todos os campos são obrigatórios.' });
+            }
+
+            // Chama o MODEL para atualizar o empréstimo/ Number(idEmprestimo) converte o idEmprestimo de string para number
+                const emprestimoAtualizado = await Emprestimo.atualizarEmprestimo(
+                idEmprestimo, idAluno, idLivro, new Date(dataEmprestimo), new Date(dataDevolucao), statusEmprestimo
+            );
+
+            // Retorna a resposta de sucesso com o ID do empréstimo atualizado
+            return res.status(200).json({ message: 'Empréstimo atualizado com sucesso', idEmprestimo: emprestimoAtualizado });
+
+        } catch (error) {
+            console.error('Erro ao atualizar empréstimo:', error);
+            return res.status(500).json({ message: 'Erro ao atualizar o empréstimo.' });
+        }
+    }
 }
 
 export default EmprestimoController;
