@@ -13,6 +13,15 @@ export class Emprestimo{
     private dataDevolucao: Date;
     private statusEmprestimo: string;
 
+     /**
+     * Construtor da classe Emprestimos
+     * 
+     * @param idAluno Identificador do aluno que fez o empréstimo
+     * @param idLivro Identificador do livro emprestado
+     * @param dataEmprestimo Data em que o empréstimo foi realizado
+     * @param dataDevolucao Data prevista para devolução do livro
+     * @param statusEmprestimo Status do empréstimo (ex.: "ativo", "devolvido")
+     */
     public constructor (_idAluno:number, _idLivro:number, _dataEmprestimo:Date, 
                         _dataDevolucao:Date, _statusEmprestimo:string) {
         

@@ -13,6 +13,16 @@ export class Aluno {
     private email: string;
     private celular: string; 
 
+    /**
+     * Construtor da classe Aluno
+     * 
+     * @param nome Nome do Aluno
+     * @param Sobrenome Sobrenome do Aluno
+     * @param dataNascimento Data de nascimento do Aluno
+     * @param endereco Endereço do Aluno
+     * @param email Email do Aluno
+     * @param celular Celular do Aluno
+     */
     public constructor (_nome:string, _sobrenome:string, _dataNascimento: Date, _endereco:string, _email:string, _celular:string){
         this.nome           = _nome;
         this.sobrenome      = _sobrenome;

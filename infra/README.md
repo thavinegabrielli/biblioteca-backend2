@@ -1,4 +1,4 @@
-Biblioteca e estrutura .json
+Biblioteca estrutura .json
 
 --------------------------------------------------------------------------------------------
  .json Cadastrar Livros

@@ -114,3 +114,49 @@ VALUES
 (2, 3, '2024-09-11', '2024-09-25', 'Em andamento'),
 (4, 5, '2024-09-11', '2024-09-25', 'Em andamento'),
 (6, 2, '2024-09-11', '2024-09-25', 'Em andamento');
+
+-- Aluno
+INSERT INTO Aluno (nome, sobrenome, data_nascimento, endereco, email, celular) 
+VALUES 
+('Neil', 'Armstrong', '1930-08-05', 'Rua Apollo, 11', 'neil.armstrong@nasa.com', '16988951234'),
+('Ada', 'Lovelace', '1815-12-10', 'Rua Algoritmo, 88', 'ada.lovelace@ti.com', '16990985566'),
+('Tim', 'Berners-Lee', '1955-06-08', 'Rua Web, 1010', 'tim.berners@web.com', '16985993212'),
+('Marie', 'Curie', '1867-11-07', 'Rua Radioatividade, 1900', 'marie.curie@nobel.com', '16983921157'),
+('Albert', 'Einstein', '1879-03-14', 'Rua Relatividade, 1879', 'albert.einstein@nobel.com', '16984995012'),
+('Sally', 'Ride', '1951-05-26', 'Rua Espacial, 77', 'sally.ride@nasa.com', '16985995544'),
+('Linus', 'Torvalds', '1969-12-28', 'Rua Kernel, 99', 'linus.torvalds@linux.com', '16980992234'),
+('Alan', 'Turing', '1912-06-23', 'Rua Máquina, 300', 'alan.turing@enigma.com', '16981994456'),
+('Dorothy', 'Hodgkin', '1910-05-12', 'Rua Cristalografia, 45', 'dorothy.hodgkin@nobel.com', '16983990011'),
+('Elon', 'Musk', '1971-06-28', 'Rua SpaceX, 2021', 'elon.musk@spacex.com', '16985992201');
+
+--livros
+INSERT INTO Livro (titulo, autor, editora, ano_publicacao, isbn, quant_total, quant_disponivel, valor_aquisicao, status_livro_emprestado) 
+VALUES 
+('Clean Code: A Handbook of Agile Software Craftsmanship', 'Robert C. Martin', 'Prentice Hall', 2008, '978-0132350884', 10, 10, 200.00, 'Disponível'),
+('The Pragmatic Programmer: Your Journey to Mastery', 'Andrew Hunt, David Thomas', 'Addison-Wesley', 1999, '978-0201616224', 8, 8, 180.00, 'Disponível'),
+('Design Patterns: Elements of Reusable Object-Oriented Software', 'Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides', 'Addison-Wesley', 1994, '978-0201633610', 6, 6, 150.00, 'Disponível'),
+('Eloquent JavaScript: A Modern Introduction to Programming', 'Marijn Haverbeke', 'No Starch Press', 2018, '978-1593279509', 9, 9, 85.00, 'Disponível'),
+('Learning Web Design: A Beginner’s Guide to HTML, CSS, JavaScript, and Web Graphics', 'Jennifer Niederst Robbins', 'O''''Reilly Media', 2018, '978-1491960202', 7, 7, 95.00, 'Disponível'),
+('HTML and CSS: Design and Build Websites', 'Jon Duckett', 'Wiley', 2011, '978-1118008188', 10, 10, 90.00, 'Disponível'),
+('JavaScript and JQuery: Interactive Front-End Web Development', 'Jon Duckett', 'Wiley', 2014, '978-1118531648', 5, 5, 100.00, 'Disponível'),
+('The Mythical Man-Month: Essays on Software Engineering', 'Frederick P. Brooks Jr.', 'Addison-Wesley', 1975, '978-0201835953', 4, 4, 130.00, 'Disponível'),
+('Introduction to Algorithms', 'Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, Clifford Stein', 'MIT Press', 2009, '978-0262033848', 6, 6, 250.00, 'Disponível'),
+('Refactoring: Improving the Design of Existing Code', 'Martin Fowler', 'Addison-Wesley', 1999, '978-0201485677', 5, 5, 170.00, 'Disponível');
+
+--Empréstimo 
+INSERT INTO Emprestimo (id_aluno, id_livro, data_emprestimo, data_devolucao, status_emprestimo) 
+VALUES 
+(11, 12, '2024-09-01', '2024-09-15', 'Concluído'),
+(13, 14, '2024-09-02', '2024-09-16', 'Concluído'),
+(15, 11, '2024-09-03', '2024-09-17', 'Atrasado'),
+(17, 13, '2024-09-04', '2024-09-18', 'Atrasado'),
+(19, 15, '2024-09-05', '2024-09-19', 'Concluído'),
+(12, 16, '2024-09-06', '2024-09-20', 'Em andamento'),
+(14, 18, '2024-09-07', '2024-09-21', 'Em andamento'),
+(16, 17, '2024-09-08', '2024-09-22', 'Atrasado'),
+(18, 20, '2024-09-09', '2024-09-23', 'Concluído'),
+(20, 19, '2024-09-10', '2024-09-24', 'Em andamento'),
+(11, 18, '2024-09-11', '2024-09-25', 'Concluído'),
+(13, 17, '2024-09-11', '2024-09-25', 'Atrasado'),
+(15, 16, '2024-09-11', '2024-09-25', 'Em andamento'),
+(17, 14, '2024-09-11', '2024-09-25', 'Concluído');

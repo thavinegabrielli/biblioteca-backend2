@@ -14,6 +14,19 @@ export class Livro {
     private valorAquisicao: number;
     private statusLivroEmprestado: string
 
+     /**
+     * Construtor da classe Livro
+     * 
+     * @param titulo Título do Livro
+     * @param autor Autor do Livro
+     * @param editora Editora do Livro
+     * @param anoPublicacao Ano de publicação do Livro
+     * @param isbn ISBN do Livro
+     * @param quantTotal Quantidade total de exemplares do Livro
+     * @param quantDisponivel Quantidade disponível de exemplares do Livro
+     * @param valorAquisicao Valor de aquisição do Livro
+     * @param statusLivroEmprestado Status de empréstimo do Livro
+     */
     public constructor (_titulo: string, _autor: string, _editora: string, _anoPublicacao: string, 
                                _isbn: string, _quantTotal: number,_quantDisponivel: number, _valorAquisicao: number, _statusLivroEmprestimo: string){
        
