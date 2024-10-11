@@ -1,43 +1,8 @@
-import express from "express";
-import cors from 'cors';
+import { server } from "./server";
 import { DataBaseModel } from "./model/DataBaseModel";
-import AlunoController from "./controller/AlunoController";
-import LivroController from "./controller/LivroController";
-import EmprestimoController from "./controller/EmprestimoController";
 
-
-// Cria o servidor express
-const app = express();
-// Define a porta que o servidor vai escutar as requisições
+//Define a porta que o servidor vai escutar as requisições
 const port: number = 3000;
-
-// criando servidor web
-const server = express();
-server.use(cors());
-server.use(express.json());
-
-// rota principal da aplicação
-server.get('/', (req, res) => {
-    res.json({ mensagem: "Rota padrão" });
-});
-
-// CRUD Aluno
-server.get('/alunos', AlunoController.todos);
-server.post('/cadastrar-aluno', AlunoController.cadastrar);
-server.delete('/remover-aluno', AlunoController.remover);
-server.put('/atualizar-aluno', AlunoController.atualizar);
-
-//CRUD Livro
-server.get('/livros', LivroController.todos);
-server.post('/cadastrar-livro', LivroController.cadastrar);
-server.delete('/remover-livro', LivroController.remover);
-server.put('/atualizar-livro', LivroController.atualizar);
-
-//CRUD Emprestimo
-server.get('/emprestimos', EmprestimoController.todos);
-server.post('/cadastrar-emprestimo', EmprestimoController.cadastrar);
-server.put('/atualizar-emprestimo', EmprestimoController.atualizar);
-
 
 new DataBaseModel().testeConexao().then((resdb) => {
     if (resdb) {
