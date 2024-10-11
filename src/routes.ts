@@ -6,7 +6,8 @@ import EmprestimoController from "./controller/EmprestimoController";
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    res.json({ mensagem: "Rota padrão" })});
+    res.json({ mensagem: "Rota padrão" })
+});
 
 // CRUD Aluno
 router.get('/alunos', AlunoController.todos);
