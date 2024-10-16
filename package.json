@@ -6,7 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "José Mateus R",
+  "author": "José Mateus R, Lucas Hideki Miyazaki, João Pedro Palomares",
   "license": "ISC",
   "description": "",
   "devDependencies": {
