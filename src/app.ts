@@ -1,8 +1,11 @@
 import { server } from "./server";
 import { DataBaseModel } from "./model/DataBaseModel";
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 //Define a porta que o servidor vai escutar as requisições
-const port: number = 3000;
+const port: number = parseInt(process.env.SERVER_PORT as string);
 
 new DataBaseModel().testeConexao().then((resdb) => {
     if (resdb) {
