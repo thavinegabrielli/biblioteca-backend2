@@ -12,7 +12,7 @@ export class Livro {
     private quantTotal: number;
     private quantDisponivel: number;
     private valorAquisicao: number;
-    private statusLivroEmprestado: string
+    private statusLivroEmprestado: string;
 
      /**
      * Construtor da classe Livro
@@ -308,6 +308,9 @@ public getISBN(): string{
         let queryResult = false;
     
         try {
+            const queryDeleteEmprestimoLivro = `DELETE FROM emprestimo WHERE id_livro=${id_livro}`;
+            await database.query(queryDeleteEmprestimoLivro);
+
             // Construção da query SQL para deletar o Livro.
             const queryDeleteLivro = `DELETE FROM Livro WHERE id_livro=${id_livro};`;
     

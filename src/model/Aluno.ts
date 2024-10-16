@@ -254,6 +254,9 @@ export class Aluno {
         let queryResult = false;
     
         try {
+            const queryDeleteEmprestimoAluno = `DELETE FROM emprestimo WHERE id_aluno=${id_aluno}`;
+            await database.query(queryDeleteEmprestimoAluno);
+
             // Construção da query SQL para deletar o Aluno.
             const queryDeleteAluno = `DELETE FROM Aluno WHERE id_aluno=${id_aluno};`;
     
@@ -309,5 +312,4 @@ export class Aluno {
             return queryResult;
         }
     }
-    
 }
