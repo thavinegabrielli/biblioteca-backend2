@@ -228,7 +228,12 @@ export class Emprestimo{
             const valores = [idAluno, idLivro, dataEmprestimo, dataDevolucao, statusEmprestimo];
             const resultado = await database.query(queryInsertEmprestimo, valores);
 
-            return resultado.rows[0].id_emprestimo; // Retorna o ID do novo empréstimo
+            if(resultado.rowCount != 0) {
+                console.log(`Empréstimo cadastrado com sucesso! ID: ${resultado.rows[0].id_emprestimo}`);
+                return resultado.rows[0].id_emprestimo;
+            }
+
+            return false; // Retorna o ID do novo empréstimo
         } catch (error) {
             console.error(`Erro ao cadastrar empréstimo: ${error}`);
             throw new Error('Erro ao cadastrar o empréstimo.');
@@ -239,7 +244,7 @@ export class Emprestimo{
      * Atualiza os dados de um empréstimo existente no banco de dados
      * 
      * @param idEmprestimo : number
-     * @param idAluno : number
+     * @param idAluno : number'
      * @param idLivro : number
      * @param dataEmprestimo : Date
      * @param dataDevolucao : Date

@@ -1,4 +1,5 @@
 import express from "express";
+import { SERVER_ROUTES } from "./appConfig";
 import AlunoController from "./controller/AlunoController";
 import LivroController from "./controller/LivroController";
 import EmprestimoController from "./controller/EmprestimoController";
@@ -10,20 +11,20 @@ router.get('/', (req, res) => {
 });
 
 // CRUD Aluno
-router.get('/alunos', AlunoController.todos);
-router.post('/cadastrar-aluno', AlunoController.cadastrar);
-router.delete('/remover-aluno', AlunoController.remover);
-router.put('/atualizar-aluno', AlunoController.atualizar);
+router.get(SERVER_ROUTES.LISTAR_ALUNOS, AlunoController.todos);
+router.post(SERVER_ROUTES.NOVO_ALUNO, AlunoController.cadastrar);
+router.delete(SERVER_ROUTES.REMOVER_ALUNO, AlunoController.remover);
+router.put(SERVER_ROUTES.ATUALIZAR_ALUNO, AlunoController.atualizar);
 
 //CRUD Livro
-router.get('/livros', LivroController.todos);
-router.post('/cadastrar-livro', LivroController.cadastrar);
-router.delete('/remover-livro', LivroController.remover);
-router.put('/atualizar-livro', LivroController.atualizar);
+router.get(SERVER_ROUTES.LISTAR_LIVROS, LivroController.todos);
+router.post(SERVER_ROUTES.NOVO_LIVRO, LivroController.cadastrar);
+router.delete(SERVER_ROUTES.REMOVER_LIVRO, LivroController.remover);
+router.put(SERVER_ROUTES.ATUALIZAR_LIVRO, LivroController.atualizar);
 
 //CRUD Emprestimo
-router.get('/emprestimos', EmprestimoController.todos);
-router.post('/cadastrar-emprestimo', EmprestimoController.cadastrar);
-router.put('/atualizar-emprestimo', EmprestimoController.atualizar);
+router.get(SERVER_ROUTES.LISTAR_EMPRESTIMOS, EmprestimoController.todos);
+router.post(SERVER_ROUTES.NOVO_EMPRESTIMO, EmprestimoController.cadastrar);
+router.put(SERVER_ROUTES.ATUALIZAR_EMPRESTIMO, EmprestimoController.atualizar);
 
 export { router }

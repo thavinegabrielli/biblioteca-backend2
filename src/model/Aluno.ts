@@ -215,9 +215,7 @@ export class Aluno {
      * @param aluno Objeto Aluno contendo as informações a serem cadastradas
      * @returns Boolean indicando se o cadastro foi bem-sucedido
      */
-    static async cadastrarAluno(aluno: Aluno): Promise<Boolean> {
-        let insertResult = false;
-        
+    static async cadastrarAluno(aluno: Aluno): Promise<Boolean> {      
         try {
             const queryInsertAluno = `
                 INSERT INTO Aluno (nome, sobrenome, data_nascimento, endereco, email, celular)
@@ -226,7 +224,7 @@ export class Aluno {
                     '${aluno.getSobrenome().toUpperCase()}',
                     '${aluno.getDataNascimento()}',
                     '${aluno.getEndereco().toUpperCase()}',
-                    '${aluno.getEmail().toUpperCase()}',
+                    '${aluno.getEmail().toLowerCase()}',
                     '${aluno.getCelular()}'
                 )
                 RETURNING id_aluno;`;
@@ -234,14 +232,14 @@ export class Aluno {
             const result = await database.query(queryInsertAluno);
 
             if (result.rows.length > 0) {
-                const idAluno = result.rows[0].id_aluno;
-                insertResult = true;
+                console.log(`Aluno cadastrado com sucesso. ID: ${result.rows[0].id_aluno}`);
+                return true;
             }
 
-            return insertResult;
+            return false;
         } catch (error) {
             console.error(`Erro ao cadastrar aluno: ${error}`);
-            return insertResult;
+            return false;
         }
     }
 
@@ -293,7 +291,7 @@ export class Aluno {
                                             data_nascimento = '${aluno.getDataNascimento()}', 
                                             endereco = '${aluno.getEndereco().toUpperCase()}',
                                             celular = '${aluno.getCelular()}', 
-                                            email = '${aluno.getEmail()}'                                            
+                                            email = '${aluno.getEmail().toLowerCase()}'                                            
                                         WHERE id_aluno = ${aluno.idAluno}`;
 
             // Executa a query de atualização e verifica se a operação foi bem-sucedida.

@@ -1,6 +1,14 @@
 import { Emprestimo } from "../model/Emprestimo";
 import { Request,Response } from "express";
 
+interface EmprestimoDTO {
+    idAluno: number;
+    idLivro: number;
+    dataEmprestimo: string;
+    dataDevolucao: string;
+    statusEmprestimo: string;
+}
+
 class EmprestimoController extends Emprestimo{
     /**
      * Método para listar todos os empréstimos.
@@ -31,16 +39,16 @@ class EmprestimoController extends Emprestimo{
      */
     static async cadastrar(req: Request, res: Response): Promise<Response> {
         try {
-            const { idAluno, idLivro, dataEmprestimo, dataDevolucao, statusEmprestimo } = req.body;
+            const dadosRecebidos: EmprestimoDTO = req.body;
 
             // Verifica se todos os campos obrigatórios foram fornecidos
-            if (!idAluno || !idLivro || !dataEmprestimo || !dataDevolucao || !statusEmprestimo) {
+            if (!dadosRecebidos.idAluno || !dadosRecebidos.idLivro || !dadosRecebidos.dataEmprestimo || !dadosRecebidos.dataDevolucao || !dadosRecebidos.statusEmprestimo) {
                 return res.status(400).json({ message: 'Todos os campos são obrigatórios.' });
             }
 
             // Chama o serviço para cadastrar o empréstimo
             const novoIdEmprestimo = await Emprestimo.cadastrarEmprestimo(
-                idAluno, idLivro, new Date(dataEmprestimo), new Date(dataDevolucao), statusEmprestimo
+                dadosRecebidos.idAluno, dadosRecebidos.idLivro, new Date(dadosRecebidos.dataEmprestimo), new Date(dadosRecebidos.dataDevolucao), dadosRecebidos.statusEmprestimo
             );
 
             // Retorna a resposta de sucesso com o ID do novo empréstimo
@@ -58,18 +66,17 @@ class EmprestimoController extends Emprestimo{
      */
     static async atualizar(req: Request, res: Response): Promise<Response> {
         try {
-
-            const { idAluno, idLivro, dataEmprestimo, dataDevolucao, statusEmprestimo } = req.body;
+            const dadosRecebidos: EmprestimoDTO = req.body;
             const idEmprestimo = parseInt(req.query.idEmprestimo as string);
             
             // Verifica se todos os campos obrigatórios foram fornecidos
-            if (!idEmprestimo || !idAluno || !idLivro || !dataEmprestimo || !dataDevolucao || !statusEmprestimo) {
+            if (!idEmprestimo || !dadosRecebidos.idAluno || !dadosRecebidos.idLivro || !dadosRecebidos.dataEmprestimo || !dadosRecebidos.dataDevolucao || !dadosRecebidos.statusEmprestimo) {
                 return res.status(400).json({ message: 'Todos os campos são obrigatórios.' });
             }
 
             // Chama o MODEL para atualizar o empréstimo/ Number(idEmprestimo) converte o idEmprestimo de string para number
                 const emprestimoAtualizado = await Emprestimo.atualizarEmprestimo(
-                idEmprestimo, idAluno, idLivro, new Date(dataEmprestimo), new Date(dataDevolucao), statusEmprestimo
+                idEmprestimo, dadosRecebidos.idAluno, dadosRecebidos.idLivro, new Date(dadosRecebidos.dataEmprestimo), new Date(dadosRecebidos.dataDevolucao), dadosRecebidos.statusEmprestimo
             );
 
             // Retorna a resposta de sucesso com o ID do empréstimo atualizado

@@ -1,10 +1,21 @@
 import { Livro } from "../model/Livro";
 import { Request, Response} from "express";
 
+interface LivroDTO {
+    titulo: string;
+    autor: string;
+    editora: string;
+    anoPublicacao?: number;
+    isbn?: string;
+    quantTotal: number;
+    quantDisponivel: number;
+    valorAquisicao?: number;
+    statusLivroEmprestado?: string
+}
+
 /**
  * Controlador para operações relacionadas aos Livros.
 */
-
 class LivroController extends Livro {
     /**
      * Lista todos os livros.
@@ -32,20 +43,19 @@ class LivroController extends Livro {
      */
     static async cadastrar(req: Request, res: Response) {
         try {
-            // Desestruturando objeto recebido pelo front-end
-            const { titulo, autor, editora, anoPublicacao, isbn, quantTotal, quantDisponivel, valorAquisicao, statusLivroEmprestado } = req.body;
+            const dadosRecebidos: LivroDTO = req.body;
             
             // Instanciando objeto Livro
             const novoLivro = new Livro(
-                titulo,
-                autor, 
-                editora,
-                anoPublicacao,
-                isbn,
-                quantTotal,
-                quantDisponivel,
-                valorAquisicao,
-                statusLivroEmprestado
+                dadosRecebidos.titulo,
+                dadosRecebidos.autor, 
+                dadosRecebidos.editora,
+                (dadosRecebidos.anoPublicacao ?? 0).toString(),
+                dadosRecebidos.isbn ?? '',
+                dadosRecebidos.quantTotal,
+                dadosRecebidos.quantDisponivel,
+                dadosRecebidos.valorAquisicao ?? 0,
+                dadosRecebidos.statusLivroEmprestado ?? 'Disponível'
             );
 
             // Chama o método para persistir o livro no banco de dados
@@ -95,11 +105,20 @@ class LivroController extends Livro {
      */
     static async atualizar(req: Request, res: Response): Promise<Response> {
         try {
-            // Desestrutura o objeto recebido na requisição para obter os dados do livro a ser atualizado
-            const { titulo, autor, editora, anoPublicacao, isbn, quantTotal, quantDisponivel, valorAquisicao, statusLivroEmprestado } = req.body;
-
+            const dadosRecebidos: LivroDTO = req.body;
+            
             // Cria uma nova instância de Livro com os dados atualizados
-            const livro = new Livro(titulo, autor, editora, anoPublicacao, isbn, quantTotal, quantDisponivel, valorAquisicao, statusLivroEmprestado);
+            const livro = new Livro(
+                dadosRecebidos.titulo,
+                dadosRecebidos.autor, 
+                dadosRecebidos.editora,
+                (dadosRecebidos.anoPublicacao ?? 0).toString(),
+                dadosRecebidos.isbn ?? '',
+                dadosRecebidos.quantTotal,
+                dadosRecebidos.quantDisponivel,
+                dadosRecebidos.valorAquisicao ?? 0,
+                dadosRecebidos.statusLivroEmprestado ?? 'Disponível'
+            );
 
             // Define o ID do livro, que deve ser passado na query string
             livro.setIdLivro(parseInt(req.query.idLivro as string));

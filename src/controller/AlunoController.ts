@@ -1,6 +1,15 @@
 import { Aluno } from "../model/Aluno";
 import { Request, Response } from "express";
 
+interface AlunoDTO {
+    nome: string;
+    sobrenome: string;
+    dataNascimento?: Date;
+    endereco?: string;
+    email?: string;
+    celular: string;
+}
+
 /**
  * Controlador para operações relacionadas aos alunos.
  */
@@ -33,16 +42,16 @@ class AlunoController extends Aluno {
     static async cadastrar(req: Request, res: Response) {
         try {
             // Desestruturando objeto recebido pelo front-end
-            const { nome, sobrenome, dataNascimento, endereco, email, celular } = req.body;
+            const dadosRecebidos: AlunoDTO = req.body;
             
             // Instanciando objeto Aluno
             const novoAluno = new Aluno(
-                nome,
-                sobrenome,
-                dataNascimento,
-                endereco,
-                email,
-                celular              
+                dadosRecebidos.nome,
+                dadosRecebidos.sobrenome,
+                dadosRecebidos.dataNascimento ?? new Date("1900-01-01"),
+                dadosRecebidos.endereco ?? '',
+                dadosRecebidos.email ?? '',
+                dadosRecebidos.celular              
             );
 
             // Chama o método para persistir o aluno no banco de dados
@@ -92,14 +101,23 @@ class AlunoController extends Aluno {
      */
     static async atualizar(req: Request, res: Response): Promise<Response> {
         try {
-            // Desestrutura o objeto recebido na requisição para obter os dados do aluno a ser atualizado
-            const { nome, sobrenome, dataNascimento, endereco, email, celular } = req.body;
-
-            // Cria uma nova instância de Aluno com os dados atualizados
-            const aluno = new Aluno(nome, sobrenome, dataNascimento, endereco, email, celular);
+            // Desestruturando objeto recebido pelo front-end
+            const dadosRecebidos: AlunoDTO = req.body;
+            
+            // Instanciando objeto Aluno
+            const aluno = new Aluno(
+                dadosRecebidos.nome,
+                dadosRecebidos.sobrenome,
+                dadosRecebidos.dataNascimento ?? new Date("1900-01-01"),
+                dadosRecebidos.endereco ?? '',
+                dadosRecebidos.email ?? '',
+                dadosRecebidos.celular              
+            );
 
             // Define o ID do aluno, que deve ser passado na query string
             aluno.setIdAluno(parseInt(req.query.idAluno as string));
+
+            console.log(dadosRecebidos);
 
             // Chama o método para atualizar o cadastro do aluno no banco de dados
             if (await Aluno.atualizarCadastroAluno(aluno)) {

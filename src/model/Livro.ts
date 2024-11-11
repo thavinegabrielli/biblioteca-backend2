@@ -288,7 +288,7 @@ public getISBN(): string{
             const result = await database.query(queryInsertLivro);
 
             if (result.rows.length > 0) {
-                const idLivro = result.rows[0].id_livro;
+                console.log(`Livro cadastrado com sucesso. ID: ${result.rows[0].id_livro}`);
                 insertResult = true;
             }
 
