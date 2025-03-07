@@ -1,6 +1,10 @@
 import { Livro } from "../model/Livro";
 import { Request, Response} from "express";
 
+/**
+ * Interface LivroDTO
+ * Define os atributos que devem ser recebidos do cliente nas requisições
+ */
 interface LivroDTO {
     titulo: string;
     autor: string;

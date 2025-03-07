@@ -1,18 +1,22 @@
 import { DataBaseModel } from "./DataBaseModel";
 
+// Recupera conexão com o banco de dados
 const database = new DataBaseModel().pool;
 
+/**
+ * Classe que representa um livro no sistema
+ */
 export class Livro {
-    private idLivro: number = 0 ;
-    private titulo: string;
-    private autor: string;
-    private editora: string;
-    private anoPublicacao: string;
-    private isbn: string;
-    private quantTotal: number;
-    private quantDisponivel: number;
-    private valorAquisicao: number;
-    private statusLivroEmprestado: string;
+    private idLivro: number = 0 ; // Identificador único do livro
+    private titulo: string; // Título do livro
+    private autor: string; // Autor do livro
+    private editora: string; // Editora do livro
+    private anoPublicacao: string; // Ano de publicação do livro
+    private isbn: string; // ISBN do livro
+    private quantTotal: number; // Quantidade total daquele exemplar
+    private quantDisponivel: number; // Quantidade disponível daquele exemplar
+    private valorAquisicao: number; // Valor da arquisição do livro
+    private statusLivroEmprestado: string; // Status do livro emprestado
 
      /**
      * Construtor da classe Livro
@@ -368,7 +372,4 @@ public getISBN(): string{
             return queryResult;
         }
     }
-
-
-
 }

@@ -1,17 +1,18 @@
-import { Aluno } from "./Aluno";
-import { Livro } from "./Livro";
 import { DataBaseModel } from "./DataBaseModel";
 
+// Recupera conexão com o banco de dados
 const database = new DataBaseModel().pool;
 
+/**
+ * Classe que representa um empréstimo no sistema
+ */
 export class Emprestimo{
-
-    private idEmprestimo: number = 0;
-    private idAluno: number;
-    private idLivro: number;
-    private dataEmprestimo: Date;
-    private dataDevolucao: Date;
-    private statusEmprestimo: string;
+    private idEmprestimo: number = 0; // identificador único do empréstimo
+    private idAluno: number; // Identificador do aluno que realizou o empréstimo
+    private idLivro: number; // Identificador do livro que foi emprestado
+    private dataEmprestimo: Date; // Data do empréstimo
+    private dataDevolucao: Date; // Data da devolução do livro
+    private statusEmprestimo: string; // Status do empréstimo
 
      /**
      * Construtor da classe Emprestimos

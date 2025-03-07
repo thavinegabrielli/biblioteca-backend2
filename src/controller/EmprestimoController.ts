@@ -1,6 +1,10 @@
 import { Emprestimo } from "../model/Emprestimo";
 import { Request,Response } from "express";
 
+/**
+ * Interface EmprestimoDTO
+ * Define os atributos que devem ser recebidos do cliente nas requisições
+ */
 interface EmprestimoDTO {
     idAluno: number;
     idLivro: number;

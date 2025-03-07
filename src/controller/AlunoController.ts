@@ -1,6 +1,10 @@
 import { Aluno } from "../model/Aluno";
 import { Request, Response } from "express";
 
+/**
+ * Interface AlunoDTO
+ * Define os atributos que devem ser recebidos do cliente nas requisições
+ */
 interface AlunoDTO {
     nome: string;
     sobrenome: string;

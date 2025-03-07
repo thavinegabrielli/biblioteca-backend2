@@ -1,17 +1,20 @@
 import { DataBaseModel } from "./DataBaseModel";
 
+// Recupera conexão com o banco de dados
 const database = new DataBaseModel().pool;
 
+/**
+ * Classe que representa um aluno no sistema
+ */
 export class Aluno {
-
-    private idAluno: number = 0;
-    private ra: string = '';
-    private nome: string;
-    private sobrenome: string;
-    private dataNascimento: Date;
-    private endereco: string;
-    private email: string;
-    private celular: string; 
+    private idAluno: number = 0; // Identificador único do aluno
+    private ra: string = ''; // Registro acadêmico do aluno
+    private nome: string; // Nome do aluno
+    private sobrenome: string; // Sobrenome do aluno
+    private dataNascimento: Date; // Data de nascimento do aluno
+    private endereco: string; // Endereço do aluno
+    private email: string; //E-mail do aluno
+    private celular: string; // Celular do aluno
 
     /**
      * Construtor da classe Aluno
