@@ -195,10 +195,14 @@ export class Emprestimo{
                 listaDeEmprestimos.push(emprestimo);
             });
     
+            // retorna a lista de empréstimos
             return listaDeEmprestimos;
     
+        // captura qualquer erro que possa acontecer
         } catch (error) {
+            // exibe o erro detalhado no console
             console.log(`Erro ao acessar o modelo: ${error}`);
+            // retorna um valor nulo
             return null;
         }
     } 
@@ -221,22 +225,33 @@ export class Emprestimo{
         statusEmprestimo: string
     ): Promise<any> {
         try {
+            // Cria a consulta (query) para inserir um empréstimo na tabela retornando o ID do empréstimo criado
             const queryInsertEmprestimo = `
                 INSERT INTO Emprestimo (id_aluno, id_livro, data_emprestimo, data_devolucao, status_emprestimo)
                 VALUES ($1, $2, $3, $4, $5) RETURNING id_emprestimo;
             `;
 
+            // estrutura os valores recebidos pela função em uma lista (array)
             const valores = [idAluno, idLivro, dataEmprestimo, dataDevolucao, statusEmprestimo];
+            // realizada a consulta no banco de dados e armazena o resultado
             const resultado = await database.query(queryInsertEmprestimo, valores);
 
+            // verifica se a quantidade de linhas alteradas é diferente de 0
             if(resultado.rowCount != 0) {
+                // exibe mensagem de sucesso no console
                 console.log(`Empréstimo cadastrado com sucesso! ID: ${resultado.rows[0].id_emprestimo}`);
+                // retorna o ID do empréstimo
                 return resultado.rows[0].id_emprestimo;
             }
 
-            return false; // Retorna o ID do novo empréstimo
+            // retorna falso
+            return false;
+        
+        // captura qualquer tipo de erro que possa acontecer
         } catch (error) {
+            // exibe o detalhe do erro no console
             console.error(`Erro ao cadastrar empréstimo: ${error}`);
+            // lança um novo erro
             throw new Error('Erro ao cadastrar o empréstimo.');
         }
     }    
@@ -261,21 +276,29 @@ export class Emprestimo{
         statusEmprestimo: string
     ): Promise<any> {
         try {
+            // Cria a consulta (query) para atualizar um empréstimo
             const queryUpdateEmprestimo = `UPDATE Emprestimo
             SET id_aluno = $1, id_livro = $2, data_emprestimo = $3, data_devolucao = $4, status_emprestimo = $5
             WHERE id_emprestimo = $6
             RETURNING id_emprestimo;`;
 
+            // estrutura os valores recebidos pela função em uma lista (array)
             const valores = [idAluno, idLivro, dataEmprestimo, dataDevolucao, statusEmprestimo, idEmprestimo];
+            // executa a consulta e armazena o resultado
             const resultado = await database.query(queryUpdateEmprestimo, valores);
 
+            // verifica se o empréstimo não existe
             if (resultado.rowCount === 0) {
+                // lança um novo erro
                 throw new Error('Empréstimo não encontrado.');
             }
 
             return resultado.rows[0].id_emprestimo; // Retorna o ID do empréstimo atualizado
+        // captura qualquer erro que possa acontecer
         } catch (error) {
+            // exibe detalhes do erro no console
             console.error(`Erro ao atualizar empréstimo: ${error}`);
+            // lança um novo erro
             throw new Error('Erro ao atualizar o empréstimo.');
         }
     }

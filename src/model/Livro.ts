@@ -7,7 +7,7 @@ const database = new DataBaseModel().pool;
  * Classe que representa um livro no sistema
  */
 export class Livro {
-    private idLivro: number = 0 ; // Identificador único do livro
+    private idLivro: number = 0; // Identificador único do livro
     private titulo: string; // Título do livro
     private autor: string; // Autor do livro
     private editora: string; // Editora do livro
@@ -18,30 +18,30 @@ export class Livro {
     private valorAquisicao: number; // Valor da arquisição do livro
     private statusLivroEmprestado: string; // Status do livro emprestado
 
-     /**
-     * Construtor da classe Livro
-     * 
-     * @param titulo Título do Livro
-     * @param autor Autor do Livro
-     * @param editora Editora do Livro
-     * @param anoPublicacao Ano de publicação do Livro
-     * @param isbn ISBN do Livro
-     * @param quantTotal Quantidade total de exemplares do Livro
-     * @param quantDisponivel Quantidade disponível de exemplares do Livro
-     * @param valorAquisicao Valor de aquisição do Livro
-     * @param statusLivroEmprestado Status de empréstimo do Livro
-     */
-    public constructor (_titulo: string, _autor: string, _editora: string, _anoPublicacao: string, 
-                               _isbn: string, _quantTotal: number,_quantDisponivel: number, _valorAquisicao: number, _statusLivroEmprestimo: string){
-       
-        this.titulo                = _titulo;
-        this.autor                 = _autor;
-        this.editora               = _editora;
-        this.anoPublicacao         = _anoPublicacao;
-        this.isbn                  = _isbn;
-        this.quantTotal            = _quantTotal;
-        this.quantDisponivel       = _quantDisponivel;
-        this.valorAquisicao        = _valorAquisicao;
+    /**
+    * Construtor da classe Livro
+    * 
+    * @param titulo Título do Livro
+    * @param autor Autor do Livro
+    * @param editora Editora do Livro
+    * @param anoPublicacao Ano de publicação do Livro
+    * @param isbn ISBN do Livro
+    * @param quantTotal Quantidade total de exemplares do Livro
+    * @param quantDisponivel Quantidade disponível de exemplares do Livro
+    * @param valorAquisicao Valor de aquisição do Livro
+    * @param statusLivroEmprestado Status de empréstimo do Livro
+    */
+    public constructor(_titulo: string, _autor: string, _editora: string, _anoPublicacao: string,
+        _isbn: string, _quantTotal: number, _quantDisponivel: number, _valorAquisicao: number, _statusLivroEmprestimo: string) {
+
+        this.titulo = _titulo;
+        this.autor = _autor;
+        this.editora = _editora;
+        this.anoPublicacao = _anoPublicacao;
+        this.isbn = _isbn;
+        this.quantTotal = _quantTotal;
+        this.quantDisponivel = _quantDisponivel;
+        this.valorAquisicao = _valorAquisicao;
         this.statusLivroEmprestado = _statusLivroEmprestimo;
     }
 
@@ -50,7 +50,7 @@ export class Livro {
      * Retorna o id do livro
      * @returns id: idLivro
      */
-    public getIdLivro(): number{
+    public getIdLivro(): number {
         return this.idLivro;
     }
 
@@ -59,15 +59,15 @@ export class Livro {
      * 
      * @param _idLivro : idLivro
      */
-    public setIdLivro(_idLivro: number): void{
+    public setIdLivro(_idLivro: number): void {
         this.idLivro = _idLivro;
     }
 
-     /**
-     * Retorna o titulo do livro
-     * @returns titulo: _titulo
-     */
-    public getTitulo(): string{
+    /**
+    * Retorna o titulo do livro
+    * @returns titulo: _titulo
+    */
+    public getTitulo(): string {
         return this.titulo;
     }
 
@@ -76,15 +76,15 @@ export class Livro {
      * 
      * @param _titulo : titulo
      */
-    public setTitulo(_titulo: string): void{
+    public setTitulo(_titulo: string): void {
         this.titulo = _titulo;
     }
-    
-     /**
-     * Retorna o autor do livro
-     * @returns autor: _autor
-     */
-     public getAutor(): string{
+
+    /**
+    * Retorna o autor do livro
+    * @returns autor: _autor
+    */
+    public getAutor(): string {
         return this.autor;
     }
 
@@ -93,15 +93,15 @@ export class Livro {
      * 
      * @param _autor : autor
      */
-    public setAutor(_autor: string): void{
+    public setAutor(_autor: string): void {
         this.autor = _autor;
     }
 
-     /**
-     * Retorna a editora do livro
-     * @returns editora: _editora
-     */
-     public getEditora(): string{
+    /**
+    * Retorna a editora do livro
+    * @returns editora: _editora
+    */
+    public getEditora(): string {
         return this.editora;
     }
 
@@ -110,15 +110,15 @@ export class Livro {
      * 
      * @param _editora : editora
      */
-    public setEditora(_editora: string): void{
+    public setEditora(_editora: string): void {
         this.editora = _editora;
     }
 
-     /**
-     * Retorna o ano de publicação do livro
-     * @returns anoPublicacao: _anoPublicacao
-     */
-     public getAnoPublicacao(): string{
+    /**
+    * Retorna o ano de publicação do livro
+    * @returns anoPublicacao: _anoPublicacao
+    */
+    public getAnoPublicacao(): string {
         return this.anoPublicacao;
     }
 
@@ -127,15 +127,15 @@ export class Livro {
      * 
      * @param _anoPublicacao : anoPublicacao
      */
-    public setAnoPublicacao(_anoPublicacao: string): void{
+    public setAnoPublicacao(_anoPublicacao: string): void {
         this.anoPublicacao = _anoPublicacao;
-    }   
+    }
 
     /**
      * Retorna o ISBN do livro
      * @returns isbn: _isbn
      */
-public getISBN(): string{
+    public getISBN(): string {
         return this.isbn;
     }
 
@@ -144,7 +144,7 @@ public getISBN(): string{
      * 
      * @param _isbn : isbn
      */
-    public setISBN(_isbn: string): void{
+    public setISBN(_isbn: string): void {
         this.isbn = _isbn;
     }
 
@@ -152,7 +152,7 @@ public getISBN(): string{
     * Retorna a quantidade total de livro
     * @returns quantidade total: quantTotal
     */
-    public getQuantTotal(): number{
+    public getQuantTotal(): number {
         return this.quantTotal;
     }
 
@@ -161,7 +161,7 @@ public getISBN(): string{
      * 
      * @param _quantTotal : quantTotal
      */
-    public setQuantTotal(_quantTotal: number): void{
+    public setQuantTotal(_quantTotal: number): void {
         this.quantTotal = _quantTotal;
     }
 
@@ -169,7 +169,7 @@ public getISBN(): string{
     * Retorna a quantidade disponivel de livro
     * @returns quantidade disponivel: quantDisponivel
     */
-    public getQuantDisponivel(): number{
+    public getQuantDisponivel(): number {
         return this.quantDisponivel;
     }
 
@@ -178,7 +178,7 @@ public getISBN(): string{
      * 
      * @param _quantDisponivel : quantDisponivel
      */
-    public setQuantDisponivel(_quantDisponivel: number): void{
+    public setQuantDisponivel(_quantDisponivel: number): void {
         this.quantDisponivel = _quantDisponivel;
     }
 
@@ -186,7 +186,7 @@ public getISBN(): string{
     * Retorna a quantidade total de livro
     * @returns quantidade total: quantTotal
     */
-    public getValorAquisicao(): number{
+    public getValorAquisicao(): number {
         return this.valorAquisicao;
     }
 
@@ -195,7 +195,7 @@ public getISBN(): string{
      * 
      * @param _valorAquisicao : valorAquisicao
      */
-    public setValorAquisicao(_valorAquisicao: number): void{
+    public setValorAquisicao(_valorAquisicao: number): void {
         this.valorAquisicao = _valorAquisicao;
     }
 
@@ -203,16 +203,16 @@ public getISBN(): string{
     * Retorna o status do livro
     * @returns status do livro : statusLivroEmprestado
     */
-    public getStatusLivroEmprestado(): string{
+    public getStatusLivroEmprestado(): string {
         return this.statusLivroEmprestado;
-    } 
+    }
 
     /**
      * Atribui o parâmetro ao atributo status livro emprestado
      * 
      * @param _statusLivroEmprestado : statusLivroEmprestado
      */
-    public setStatusLivroEmprestado(_statusLivroEmprestado: string): void{
+    public setStatusLivroEmprestado(_statusLivroEmprestado: string): void {
         this.statusLivroEmprestado = _statusLivroEmprestado;
     }
 
@@ -252,15 +252,19 @@ public getISBN(): string{
                 );
                 // adicionando o ID ao objeto
                 novoLivro.setIdLivro(livro.id_livro);
-                                
+
                 // adicionando um livro na lista
                 listaDeLivros.push(novoLivro);
             });
 
             // retornado a lista de livros para quem chamou a função
             return listaDeLivros;
+        
+        // captura qualquer erro que aconteça
         } catch (error) {
+            // exibe detalhes do erro no console
             console.log(`Erro ao acessar o modelo: ${error}`);
+            // retorna um valor nulo
             return null;
         }
     }
@@ -271,9 +275,11 @@ public getISBN(): string{
      * @returns Boolean indicando se o cadastro foi bem-sucedido
      */
     static async cadastrarLivro(livro: Livro): Promise<Boolean> {
+        // variável de controle da execução da query
         let insertResult = false;
-        
+
         try {
+            // Cria a consulta (query) para inserir livro na tabela retornado o ID do livro
             const queryInsertLivro = `
                 INSERT INTO Livro (titulo, autor, editora, ano_publicacao, isbn, quant_total, quant_disponivel, valor_aquisicao, status_livro_emprestado)
                 VALUES (
@@ -289,16 +295,24 @@ public getISBN(): string{
                 )
                 RETURNING id_livro;`;
 
+            // executa a consulta no banco e armazena o resultado
             const result = await database.query(queryInsertLivro);
 
+            // verifica se o número de linhas alteradas no banco de dados é maior que 0
             if (result.rows.length > 0) {
+                // exibe mensagem de sucesso no console
                 console.log(`Livro cadastrado com sucesso. ID: ${result.rows[0].id_livro}`);
+                // altera o valor da variável de controle para verdadeiro
                 insertResult = true;
             }
 
+            // retorna o valor da variável de controle
             return insertResult;
+        // captura qualquer tipo de erro que possa acontecer
         } catch (error) {
+            // exibe detalhes do erro no console
             console.error(`Erro ao cadastrar livro: ${error}`);
+            // retorna o valor da variável de controle
             return insertResult;
         }
     }
@@ -309,28 +323,34 @@ public getISBN(): string{
      * @returns Boolean indicando se a remoção foi bem-sucedida
     */
     static async removerLivro(id_livro: number): Promise<Boolean> {
+        // variável de controle da execução da query
         let queryResult = false;
-    
+
         try {
+            // Cria a consulta para rmeover empréstimo do banco de dados
             const queryDeleteEmprestimoLivro = `DELETE FROM emprestimo WHERE id_livro=${id_livro}`;
+            // executa a query para remover empréstimo
             await database.query(queryDeleteEmprestimoLivro);
 
             // Construção da query SQL para deletar o Livro.
             const queryDeleteLivro = `DELETE FROM Livro WHERE id_livro=${id_livro};`;
-    
+
             // Executa a query de exclusão e verifica se a operação foi bem-sucedida.
             await database.query(queryDeleteLivro)
-            .then((result) => {
-                if (result.rowCount != 0) {
-                    queryResult = true; // Se a operação foi bem-sucedida, define queryResult como true.
-                }
-            });
-    
+                .then((result) => {
+                    if (result.rowCount != 0) {
+                        queryResult = true; // Se a operação foi bem-sucedida, define queryResult como true.
+                    }
+                });
+
+            // retorna o valor da variável de controle
             return queryResult;
 
+        // captura qualquer erro que possa acontecer
         } catch (error) {
-            // Em caso de erro na consulta, exibe o erro no console e retorna false.
+            // Exibe detalhes do erro no console
             console.log(`Erro na consulta: ${error}`);
+            // retorna o valor fa variável de controle
             return queryResult;
         }
     }
@@ -358,17 +378,19 @@ public getISBN(): string{
 
             // Executa a query de atualização e verifica se a operação foi bem-sucedida.
             await database.query(queryAtualizarLivro)
-            .then((result) => {
-                if (result.rowCount != 0) {
-                    queryResult = true; // Se a operação foi bem-sucedida, define queryResult como true.
-                }
-            });
+                .then((result) => {
+                    if (result.rowCount != 0) {
+                        queryResult = true; // Se a operação foi bem-sucedida, define queryResult como true.
+                    }
+                });
 
             // Retorna o resultado da operação para quem chamou a função.
             return queryResult;
+        // captura qualquer erro que possa acontecer
         } catch (error) {
-            // Em caso de erro na consulta, exibe o erro no console e retorna false.
+            // exibe detalhes do erro no console
             console.log(`Erro na consulta: ${error}`);
+            // retorna o valor da variável de controle
             return queryResult;
         }
     }

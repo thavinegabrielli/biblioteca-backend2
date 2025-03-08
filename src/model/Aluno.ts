@@ -220,6 +220,7 @@ export class Aluno {
      */
     static async cadastrarAluno(aluno: Aluno): Promise<Boolean> {      
         try {
+            // Cria a consulta (query) para inserir o registro de um aluno no banco de dados, retorna o ID do aluno que foi criado no final
             const queryInsertAluno = `
                 INSERT INTO Aluno (nome, sobrenome, data_nascimento, endereco, email, celular)
                 VALUES (
@@ -232,16 +233,24 @@ export class Aluno {
                 )
                 RETURNING id_aluno;`;
 
+            // Executa a query no banco de dados e armazena o resultado
             const result = await database.query(queryInsertAluno);
 
+            // verifica se a quantidade de linhas que foram alteradas é maior que 0
             if (result.rows.length > 0) {
+                // Exibe a mensagem de sucesso
                 console.log(`Aluno cadastrado com sucesso. ID: ${result.rows[0].id_aluno}`);
+                // retorna verdadeiro
                 return true;
             }
 
+            // caso a consulta não tenha tido sucesso, retorna falso
             return false;
+        // captura erro
         } catch (error) {
+            // Exibe mensagem com detalhes do erro no console
             console.error(`Erro ao cadastrar aluno: ${error}`);
+            // retorna falso
             return false;
         }
     }
@@ -252,10 +261,14 @@ export class Aluno {
      * @returns Boolean indicando se a remoção foi bem-sucedida
     */
     static async removerAluno(id_aluno: number): Promise<Boolean> {
+        // variável para controle de resultado da consulta (query)
         let queryResult = false;
     
         try {
+            // Cria a consulta (query) para remover o aluno
             const queryDeleteEmprestimoAluno = `DELETE FROM emprestimo WHERE id_aluno=${id_aluno}`;
+
+            // remove os emprestimos associado ao aluno
             await database.query(queryDeleteEmprestimoAluno);
 
             // Construção da query SQL para deletar o Aluno.
@@ -269,11 +282,14 @@ export class Aluno {
                 }
             });
     
+            // retorna o resultado da query
             return queryResult;
 
+        // captura qualquer erro que aconteça
         } catch (error) {
             // Em caso de erro na consulta, exibe o erro no console e retorna false.
             console.log(`Erro na consulta: ${error}`);
+            // retorna false
             return queryResult;
         }
     }
