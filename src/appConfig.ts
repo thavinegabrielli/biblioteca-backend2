@@ -1,17 +1,17 @@
 const SERVER_ROUTES = {
     NOVO_ALUNO: '/novo/aluno',
-    ATUALIZAR_ALUNO: '/atualizar/aluno',
-    REMOVER_ALUNO: '/remover/aluno',
-    LISTAR_ALUNOS: '/listar/alunos',
+    ATUALIZAR_ALUNO: '/atualiza/aluno',
+    REMOVER_ALUNO: '/remove/aluno',
+    LISTAR_ALUNOS: '/lista/alunos',
 
     NOVO_LIVRO: '/novo/livro',
-    ATUALIZAR_LIVRO: '/atualizar/livro',
-    REMOVER_LIVRO: '/remover/livro',
-    LISTAR_LIVROS: '/listar/livros',
+    ATUALIZAR_LIVRO: '/atualiza/livro',
+    REMOVER_LIVRO: '/remove/livro',
+    LISTAR_LIVROS: '/lista/livros',
 
     NOVO_EMPRESTIMO: '/novo/emprestimo',
-    ATUALIZAR_EMPRESTIMO: '/atualizar/emprestimo',
-    LISTAR_EMPRESTIMOS: '/listar/emprestimos',
+    ATUALIZAR_EMPRESTIMO: '/atualiza/emprestimo',
+    LISTAR_EMPRESTIMOS: '/lista/emprestimos',
 }
 
 export { SERVER_ROUTES }
