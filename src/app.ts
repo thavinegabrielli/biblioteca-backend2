@@ -13,7 +13,7 @@ new DataBaseModel().testeConexao().then((resdb) => {
         console.log("Conexão com banco de dados realizada com sucesso!");
         // iniciando o servidor
         server.listen(port, () => {
-            console.log(`Servidor iniciado no endereço http://localhost:${port}`);
+            console.log(`Servidor iniciado no endereço ${process.env.SERVER_URL}:${port}`);
         });
     } else {
         console.log("Erro ao conectar com o banco de dados");
